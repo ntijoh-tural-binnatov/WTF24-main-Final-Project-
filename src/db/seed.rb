@@ -9,12 +9,12 @@ def db
 end
 
 def drop_tables
-    db.execute('DROP TABLE IF EXISTS cart_items'),
-    db.execute('DROP TABLE IF EXISTS categories'),
-    db.execute('DROP TABLE IF EXISTS order'),
-    db.execute('DROP TABLE IF EXISTS payments'),
-    db.execute('DROP TABLE IF EXISTS products'),
-    db.execute('DROP TABLE IF EXISTS review'),
+    db.execute('DROP TABLE IF EXISTS cart_items')
+    db.execute('DROP TABLE IF EXISTS categories')
+    db.execute('DROP TABLE IF EXISTS order')
+    db.execute('DROP TABLE IF EXISTS payments')
+    db.execute('DROP TABLE IF EXISTS products')
+    db.execute('DROP TABLE IF EXISTS review')
     db.execute('DROP TABLE IF EXISTS users')
 end
 
