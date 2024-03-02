@@ -20,6 +20,7 @@ end
 
 def create_tables
 
+
     db.execute('CREATE TABLE cart_items(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         total_price INTEGER NOT NULL,
@@ -30,7 +31,7 @@ def create_tables
 
     db.execute('CREATE TABLE categories(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name INTEGER NOT NULL,
+        name TEXT NOT NULL,
     )')
 
     db.execute('CREATE TABLE order(
@@ -47,9 +48,10 @@ def create_tables
 
     db.execute('CREATE TABLE products(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        price INTEGER,
         name TEXT NOT NULL,
-        description TEXT NOT NULL
+        price INTEGER,
+        description TEXT NOT NULL,
+        rating INTEGER
     )')
 
     db.execute('CREATE TABLE review(
@@ -64,17 +66,26 @@ def create_tables
         password TEXT NOT NULL
     )')
 
-end
 
 def seed_tables
 
     products = [
-        {name: 'Blue t-shirt', price: '200' , description: 'a soft, juicy and gorgeous blue t-shirt!'},
+        {name: 'GAK t-shirt', price: '200 SEK' , description: 'a soft, juicy and gorgeous blue t-shirt!', rating: '7/10'}
     ]
 
     products.each do |product|
-        db.execute('INSERT INTO products (name, price, description) VALUES (?,?,?)', product[:name], product[:price], product[:description])
+        db.execute('INSERT INTO products (name, price, description, rating) VALUES (?,?,?,?)', product[:name], product[:price], product[:description], product[:rating])
     end
+
+
+    categories = [{name: 'T-shirts'}]
+
+    categories.each do |category|
+        db.execute('INSERT INTO categories (name) VALUES (?)', category[:name])
+    end
+
+
+
 end
 
 drop_tables

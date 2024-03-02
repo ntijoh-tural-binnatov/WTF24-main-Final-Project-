@@ -1,12 +1,3 @@
-<h2>Hello from index.erb</h2>
+<a href="/categories">Categories</a><br>
 
-<h2>products</h2>
-<ul>
-<% @products.each do |product |%>
-  <li>
-    <a href="/products/<%= product['id'] %>"><%= product['name'] %></a><br>
-  </li>
-<% end %>
-</ul>
 
-<a href="/products/new">Add a product</a>
