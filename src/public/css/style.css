@@ -1,0 +1,63 @@
+body{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: turquoise;
+}
+
+h1{
+    text-align: center;
+    color: red;
+}
+
+#product_page{
+    display: flex;
+}
+
+.product{
+    flex: 20%;
+    max-width: 20%;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 15px;
+    transform: translateY(20%);
+    
+}
+
+.product_text{
+    text-align: center;
+}
+
+.product_img{
+    width: 80%;
+}
+
+.product_link{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.review{
+    border-style: solid;
+    width: fit-content;
+    margin: 1vh;
+    margin-left: 1vw;
+    padding: 5px;
+}
+
+#tags{
+    height: fit-content;
+}
+
+.links a{
+    background-color: red;
+    border-radius: 20px;
+    width: fit-content;
+}
+
+.links li{
+    list-style: none;
+}
+

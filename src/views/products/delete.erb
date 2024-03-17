@@ -1,0 +1,5 @@
+<p>Are you sure you would like to delete <%=@product['name']%>?</p>
+
+<form action="/products/<%=@product['id']%>/delete" method='post'>
+    <button type="submit">Delete</button>
+</form> 
