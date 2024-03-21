@@ -1,28 +1,50 @@
 body{
     display: flex;
     flex-wrap: wrap;
-    background-color: turquoise;
+    flex-direction: row;
 }
 
-h1{
-    text-align: center;
-    color: red;
+.logo{
+    height: 180px;
+    width: 180px;
 }
+
+
+.layout .logo{
+    height: 85px;
+    width: 85px;
+    transform: translateY(-90%);
+}
+
+.layout h1{
+    transform: translateX(80%);
+    text-decoration: none;
+}
+
+
 
 #product_page{
     display: flex;
 }
 
 .product{
-    flex: 20%;
+    flex: 25%;
     max-width: 20%;
     align-items: center;
     justify-content: center;
     border: 1px solid #ccc;
     border-radius: 8px;
     margin: 15px;
-    transform: translateY(20%);
-    
+    transform: translateY(20%);  
+}
+
+.product h2{
+    text-align: center;
+}
+
+.product p{
+    text-align: center;
+
 }
 
 .product_text{
@@ -42,8 +64,7 @@ h1{
 .review{
     border-style: solid;
     width: fit-content;
-    margin: 1vh;
-    margin-left: 1vw;
+    margin-left: 8vw;
     padding: 5px;
 }
 
@@ -52,12 +73,34 @@ h1{
 }
 
 .links a{
-    background-color: red;
+    background-color: blue;
+    color: whitesmoke;
     border-radius: 20px;
     width: fit-content;
 }
 
 .links li{
     list-style: none;
+    position: absolute;
+    top: 60%;
+}
+
+.product img{
+    margin-left: 10%;
+}
+
+.rating-part{
+    margin-right: 60%;
+    background-color: red;
+    transform: translateY(-20%);
+}
+
+.rating-result{
+    background: hotpink;
+    transform: translateY(-20%);
+}
+
+.tags{
+    transform: translateX(300px);
 }
 

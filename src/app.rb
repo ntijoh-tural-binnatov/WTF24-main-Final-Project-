@@ -36,7 +36,7 @@ class App < Sinatra::Base
             amount += 1
         end
         if (amount == 0)
-            @rating = "Be the first to review!"
+            @rating = "Review this product!"
         else
             @rating = "#{(sum_ratings/amount).round(2)}/5" 
         end

@@ -2,33 +2,37 @@
     <img class="product_img"src="/<%=@product['image_path']%>" alt="<%=@product['name']%>">
     <h2><%= @product['name'] %></h2>
     <p><%= @product['description'] %></p>
-    <p>Price: <%= @product['price'] %></p>
+    <p>Price: <%= @product['price'] %> SEK</p>
     <h2>Rating: <%=@rating%></h2>
 </div>
 
-<h3>Tags:</h3>
+<div class="tags">
+    <h3>Tags:</h3>
 <% @product_tags.each do |tag| %>
     <p><%=tag['tag_name']%></p>
 <% end %>
+</div>
 
 <div class="links">
     <li>
         <ul><a href="/products">Return To Homepage</a></ul>
-        <ul><a href="/products">Return To Homepage</a></ul>
-        <ul><a href="/products/<%=@product['id']%>/delete">Delete Product</a></ul>
     </li>
 </div>
 
-<form action="/products/review/<%=@product['id']%>" method='post'>
-    Rating: <input type="number" min = "0" max = "5" name='rating'></input><br><br>
-    Review: <input type="text" name='review'></input><br><br>
-    <button type="submit">Comment</button>
-</form><br><br>
+<div class="rating-part">
+    <form action="/products/review/<%=@product['id']%>" method='post'>
+        Rating: <input type="number" min = "0" max = "5" name='rating'></input><br><br>
+        Review: <input type="text" name='review'></input><br><br>
+        <button type="submit">Comment</button>
+    </form><br><br>
+</div>
 
-<% @reviews.each do |review| %>
+<div class="rating-result">
+    <% @reviews.each do |review| %>
     <div class="review">
         <h2>Rating:<%=review['rating']%>/5</h2>
         <p><%=review['review']%></p>
         <a href="/reviews/<%=review['review_id']%>/delete">Delete Comment</a>
     </div>
-<% end %>
+    <% end %>
+</div>

@@ -85,7 +85,8 @@ def seed_tables
         {name: 'Shirts'},
         {name: 'Jackets'},
         {name: 'Pants'},
-        {name: 'Shorts'}
+        {name: 'Shorts'},
+        {name: 'Accessories'}
     ]
 
     tags.each do |tag|
