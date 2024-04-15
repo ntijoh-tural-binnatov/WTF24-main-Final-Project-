@@ -15,19 +15,19 @@
 
 <div class="links">
     <li>
-        <ul><a href="/products">Return To Homepage</a></ul>
+        <ul><a href="/products">To Homepage</a></ul>
     </li>
 </div>
 
-<div class="rating-part">
+<div class="giving-rating">
     <form action="/products/review/<%=@product['id']%>" method='post'>
-        Rating: <input type="number" min = "0" max = "5" name='rating'></input><br><br>
+        Rating: <input type="number" min = "0" max = "10" name='rating'></input><br><br>
         Review: <input type="text" name='review'></input><br><br>
-        <button type="submit">Comment</button>
+        <button type="submit">Review</button>
     </form><br><br>
 </div>
 
-<div class="rating-result">
+<div class="rating-show">
     <% @reviews.each do |review| %>
     <div class="review">
         <h2>Rating:<%=review['rating']%>/5</h2>

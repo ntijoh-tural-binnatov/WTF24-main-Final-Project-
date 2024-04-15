@@ -14,7 +14,7 @@ def drop_tables
     db.execute('DROP TABLE IF EXISTS product_tags')
     db.execute('DROP TABLE IF EXISTS tags')
     db.execute('DROP TABLE IF EXISTS user_reviews')
-    db.execute('DROP TABLE IF EXISTS users')
+    db.execute('DROP TABLE IF EXISTS users_account')
     db.execute('DROP TABLE IF EXISTS product_reviews')
 end
 
@@ -52,9 +52,9 @@ def create_tables
         "review_id"	INTEGER
     )')
     
-    db.execute('CREATE TABLE "users" (
+    db.execute('CREATE TABLE "users_account" (
         "id"	INTEGER,
-        "username"	TEXT NOT NULL UNIQUE,
+        "username"	TEXT NOT NULL,
         "password"	TEXT NOT NULL,
         PRIMARY KEY("id" AUTOINCREMENT)
     )')
@@ -71,16 +71,7 @@ def create_tables
 end
 
 def seed_tables
-
-    products = [
-        {name: 'GAK-shirt', description: ' a soft, juicy and gorgeous blue t-shirt!', price: 199, image_path: 'img/product/Blue-shirt.jpg'},
-        {name: 'GAK-jacket', description: 'a soft, juicy and gorgeous blue jacket!', price: 459, image_path: "img/product/Blue-jacket.jpg"}
-    ]
-
-    products.each do |product|
-        db.execute('INSERT INTO products (name, description, price, image_path) VALUES (?,?,?,?)', product[:name], product[:description], product[:price], product[:image_path])
-    end
-
+    
     tags = [
         {name: 'Shirts'},
         {name: 'Jackets'},
@@ -93,8 +84,15 @@ def seed_tables
         db.execute('INSERT INTO tags (tag_name) VALUES (?)', tag[:name])
     end
 
-    
 
+    products = [
+        {name: 'GAK-shirt', description: ' a soft, juicy and gorgeous blue t-shirt!', price: 199, image_path: 'img/product/Blue-shirt.jpg'},
+        {name: 'GAK-jacket', description: 'a soft, juicy and gorgeous blue jacket!', price: 459, image_path: "img/product/Blue-jacket.jpg"}
+    ]
+
+    products.each do |product|
+        db.execute('INSERT INTO products (name, description, price, image_path) VALUES (?,?,?,?)', product[:name], product[:description], product[:price], product[:image_path])
+    end 
 end
 
 drop_tables

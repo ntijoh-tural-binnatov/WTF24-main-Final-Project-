@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     base64 (0.2.0)
+    bcrypt (3.1.20)
     daemons (1.4.1)
     eventmachine (1.2.7)
     ffi (1.16.3)
@@ -36,6 +37,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt
   rack (~> 2.2.8)
   rerun
   sinatra

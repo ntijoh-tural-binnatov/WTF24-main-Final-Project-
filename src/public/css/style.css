@@ -2,6 +2,7 @@ body{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    background-image: url(/src/public/img/product/GAK-logo.jpg);
 }
 
 .logo{
@@ -22,14 +23,14 @@ body{
 }
 
 
-
 #product_page{
     display: flex;
+    background-color: red;
 }
 
 .product{
     flex: 25%;
-    max-width: 20%;
+    max-width: 30%;
     align-items: center;
     justify-content: center;
     border: 1px solid #ccc;
@@ -89,18 +90,34 @@ body{
     margin-left: 10%;
 }
 
-.rating-part{
+.giving-rating{
     margin-right: 60%;
-    background-color: red;
-    transform: translateY(-20%);
+    border: 2px solid black;
+    padding: 10px;
+    height: 100px;
+    width: auto;
 }
 
-.rating-result{
-    background: hotpink;
-    transform: translateY(-20%);
+.rating-show{
+    width: fit-content;
+    height: auto;
 }
 
 .tags{
     transform: translateX(300px);
 }
 
+.register form{
+    transform: translateY(150%);
+}
+
+.login form{
+    transform: translateY(150%);
+}
+
+.knapp_logga_in{
+    height: fit-content;
+    width: auto;
+    font-size: 15px;
+    transform: translate(65rem,-10rem);
+}
