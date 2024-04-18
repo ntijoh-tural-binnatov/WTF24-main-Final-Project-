@@ -77,8 +77,9 @@ def seed_tables
         {name: 'Jackets'},
         {name: 'Pants'},
         {name: 'Shorts'},
+        {name: 'Bag'},
         {name: 'Accessories'}
-    ]
+    ]   
 
     tags.each do |tag|
         db.execute('INSERT INTO tags (tag_name) VALUES (?)', tag[:name])

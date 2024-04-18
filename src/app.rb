@@ -50,14 +50,14 @@ class App < Sinatra::Base
         erb :'products/new'
     end 
     
-    get '/products/:id' do |id|
+    get '/products/product/:id' do |id|
         @product = db.execute('SELECT * FROM products WHERE id = ?', id).first
         @reviews = db.execute('SELECT * FROM reviews INNER JOIN product_reviews ON reviews.id = product_reviews.review_id INNER JOIN products ON product_reviews.product_id = products.id WHERE products.id = ?', id)
         @product_tags = db.execute('SELECT * FROM tags INNER JOIN product_tags ON tags.id = product_tags.tag_id INNER JOIN products ON products.id = product_tags.product_id WHERE products.id = ?', id)
         sum_ratings = 0
         värde = 0.0
         @reviews.each do |review|
-            sum_ratings += review['rating']
+            sum_ratings += review['rating'].to_i
             värde += 1
         end
         if (värde == 0)
@@ -66,6 +66,25 @@ class App < Sinatra::Base
             @rating = "#{(sum_ratings/värde).round(2)}/5" 
         end
         erb :'products/show'
+    end
+
+    get '/products/:id' do |id|
+        @products = []
+        @tagid = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first['id']
+        @product_tags_selected = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', @tagid)
+        for tag in @product_tags_selected do
+            tag = tag['product_id']
+            product = db.execute('SELECT * FROM products WHERE id = ?', tag).first
+            @products.append(product)
+        end
+        @tags = db.execute('SELECT * FROM tags')
+        @product_tags = db.execute('SELECT * FROM tags INNER JOIN product_tags ON tags.id = product_tags.tag_id INNER JOIN products ON product_tags.product_id = products.id')
+        erb :'products/index'
+    end
+
+    post '/products/tags' do
+        tag = params["tag"]
+        redirect "/products/#{tag}"
     end
 
     post '/products/create' do

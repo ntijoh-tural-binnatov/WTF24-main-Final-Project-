@@ -1,17 +1,18 @@
 <div id="product_page">
   <label for="tags">Select product tag:</label>
   <form id="tagsForm" action="/products/tags" method="post">
-    <select id="tags">
+    <select id="tags" name="tag">
       <option value="all"> All products </option>
       <% @tags.each do |tag| %>
         <option value="<%=tag['tag_name']%>"><%=tag['tag_name']%></option>
       <% end %>
     </select>
+    <input type="submit" value="Sort">
   </form>
 
   <% @products.each do |product| %>
     <div class="product">
-      <a class = "product_link" href="products/<%=product['id']%>">
+      <a class = "product_link" href="product/<%=product['id']%>">
       <img class="product_img"src="<%=product['image_path']%>" alt="<%=product['name']%>">
       <h2 class="product_text"><%= product['name'] %></h2>
       </a>
