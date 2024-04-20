@@ -1,123 +1,218 @@
-body{
+body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    background-image: url(/src/public/img/product/GAK-logo.jpg);
+    background-color:#007bff;
+    overflow-x: hidden;
 }
 
-.logo{
+.logo {
     height: 180px;
     width: 180px;
 }
 
-
-.layout .logo{
+.layout .logo {
     height: 85px;
     width: 85px;
     transform: translateY(-90%);
+    filter: brightness(1%);
 }
 
-.layout h1{
+.layout h1 {
     transform: translateX(80%);
     text-decoration: none;
 }
 
-
-#product_page{
+#product_page {
     display: flex;
-    background-color: blue;
-}
-
-.product{
-    flex: 25%;
-    max-width: 30%;
-    align-items: center;
     justify-content: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    background-color: yellow;
+    padding: 20px;
+}
+
+#product_page input {
+    margin: 5px;
+}
+
+.product {
+    flex: 0 1 30%;
     margin: 15px;
-    transform: translateY(20%);  
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.product h2{
+.product_text {
+    text-align: center;
+    color: darkorchid;
+    margin-bottom: 10px;
+}
+
+.product_img {
+    display: block;
+    margin: 0 auto 15px;
+    max-width: 100%;
+    height: auto;
+}
+
+.product p {
     text-align: center;
 }
 
-.product p{
+.product_link {
     text-align: center;
-
+    display: block;
+    margin: 20px auto;
+    text-decoration: none;
+    color: #007bff;
 }
 
-.product_text{
-    text-align: center;
+.product_link:hover {
+    text-decoration: underline;
 }
 
-.product_img{
-    width: 80%;
-}
-
-.product_link{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.review{
+.review {
     border-style: solid;
     width: fit-content;
     margin-left: 8vw;
     padding: 5px;
+    background-color: white;
 }
 
-#tags{
+#tags {
     height: fit-content;
 }
 
-.links a{
-    background-color: blue;
+.links a {
     color: whitesmoke;
     border-radius: 20px;
     width: fit-content;
 }
 
-.links li{
+.links a:hover {
+    background-color: black;
+}
+
+.links li {
     list-style: none;
     position: absolute;
     top: 60%;
 }
 
-.product img{
-    margin-left: 10%;
-}
-
-.giving-rating{
+.giving-rating {
     margin-right: 60%;
+    margin-left: 50px;
     border: 2px solid black;
-    padding: 10px;
-    height: 100px;
+    padding: 15px;
+    height: fit-content;
     width: auto;
 }
 
-.rating-show{
-    width: fit-content;
-    height: auto;
+.rating-show .review {
+    display: inline-block;
+    margin: 2px;
+    flex-basis: 100%;
 }
 
-.tags{
+.tags {
     transform: translateX(300px);
 }
 
-.register form{
+.register form {
     transform: translateY(150%);
 }
 
-.login form{
+.login form {
     transform: translateY(150%);
 }
 
-.knapp_logga_in{
+.knapp_logga_in {
     height: fit-content;
     width: auto;
     font-size: 15px;
     transform: translate(65rem,-10rem);
+}
+
+.the_product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    margin-top: 6pc;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.the_product_image {
+    width: 200px;
+    height: auto;
+}
+
+.product_details {
+    flex: 1;
+}
+
+.tags {
+    margin-bottom: 20px;
+}
+
+.links {
+    margin-bottom: 20px;
+}
+
+
+.giving-rating input[type="number"], .giving-rating input[type="text"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.giving-rating button[type="submit"] {
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.giving-rating button[type="submit"]:hover {
+    background-color: black;
+    color: white;
+}
+
+.rating-show .review a {
+    text-decoration: none;
+}
+
+.delete_comment{
+    transform: translateY(60%);
+}
+
+
+.create_new_product {
+    border-style: solid;
+    width: fit-content;
+    transform: translateY(70%);
+    padding: 5px;
+    background-color: white;
+}
+
+.create_new_product h2 {
+    text-align: center;
+    transform: translateY(-70%);
+}
+
+.create_button{
+    height: 50px;
+    width: 50px;
+    transform: translateX(-9rem);
+    transform: translateY(3rem);
+}
+
+.create_button a{
+    text-decoration: none;
+    color: black;
 }

@@ -1,5 +1,7 @@
-<p>Are you sure you would like to delete the comment "<%=@review['review']%>" ?</p>
+<div class="delete_comment">
+    <p>Are you sure you would like to delete the comment "<%=@review['review']%>" ?</p>
 
-<form action="/reviews/<%=@review['id']%>/delete" method='post'>
-    <button type="submit">Delete</button>
-</form> 
+    <form action="/reviews/<%=@review['id']%>/delete" method='post'>
+        <button type="submit">Delete</button>
+    </form> 
+</div>

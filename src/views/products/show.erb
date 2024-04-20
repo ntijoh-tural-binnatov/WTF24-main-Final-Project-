@@ -1,38 +1,43 @@
-<div class="product">
-    <img class="product_img"src="/<%=@product['image_path']%>" alt="<%=@product['name']%>">
-    <h2><%= @product['name'] %></h2>
-    <p><%= @product['description'] %></p>
-    <p>Price: <%= @product['price'] %> SEK</p>
-    <h2>Rating: <%=@rating%></h2>
+<div class="the_product">
+    <img class="the_product_image" src="/<%= @product['image_path'] %>" alt="<%= @product['name'] %>">
+    <div class="product_details">
+        <h2><%= @product['name'] %></h2>
+        <p><%= @product['description'] %></p>
+        <p>Price: <%= @product['price'] %> SEK</p>
+        <h2>Rating: <%=@rating%></h2>
+    </div>
 </div>
 
 <div class="tags">
     <h3>Tags:</h3>
-<% @product_tags.each do |tag| %>
-    <p><%=tag['tag_name']%></p>
-<% end %>
+    <% @product_tags.each do |tag| %>
+        <p><%= tag['tag_name'] %></p>
+    <% end %>
 </div>
 
 <div class="links">
-    <li>
-        <ul><a href="/products">To Homepage</a></ul>
-    </li>
+    <a href="/products"><input type="submit" value="Homepage"></a>
 </div>
 
 <div class="giving-rating">
+    <h3>Leave a Review</h3>
     <form action="/products/review/<%=@product['id']%>" method='post'>
-        Rating: <input type="number" min = "0" max = "10" name='rating'></input><br><br>
-        Review: <input type="text" name='review'></input><br><br>
-        <button type="submit">Review</button>
-    </form><br><br>
+        <label for="rating">Rating:</label>
+        <input type="number" min="0" max="5" name='rating'><br>
+        <label for="review">Review:</label>
+        <input type="text" name='review'><br>
+        <input type="hidden" name="redirect_to" value="<%= request.base_url %>/products/product/<%= @product['id'] %>">
+        <button type="submit">Submit review</button>
+    </form>
 </div>
 
 <div class="rating-show">
+    <h3>Reviews:</h3>
     <% @reviews.each do |review| %>
-    <div class="review">
-        <h2>Rating:<%=review['rating']%>/5</h2>
-        <p><%=review['review']%></p>
-        <a href="/reviews/<%=review['review_id']%>/delete">Delete Comment</a>
-    </div>
+        <div class="review">
+            <h4>Rating: <%= review['rating'] %>/5</h4>
+            <p><%= review['review'] %></p>
+            <a href="/reviews/<%= review['review_id'] %>/delete">Delete Comment</a>
+        </div>
     <% end %>
 </div>

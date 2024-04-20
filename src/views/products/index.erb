@@ -1,23 +1,28 @@
+<!-- På startsidan, antar att @products är en lista med produkter som ska visas -->
 <div id="product_page">
+  <!-- Formulär för att välja produkttagg -->
   <label for="tags">Select product tag:</label>
   <form id="tagsForm" action="/products/tags" method="post">
     <select id="tags" name="tag">
-      <option value="all"> All products </option>
+      <option value="all">All products</option>
+      <!-- Loop genom varje tagg och skapa ett alternativ för varje -->
       <% @tags.each do |tag| %>
-        <option value="<%=tag['tag_name']%>"><%=tag['tag_name']%></option>
+        <option value="<%= tag['tag_name'] %>"><%= tag['tag_name'] %></option>
       <% end %>
     </select>
-    <input type="submit" value="Sort">
+    <input type="submit" value="Sort tag">
+    <div class="create_button"><button><a href="/products/new">Create product</a></button></div>
   </form>
 
+  <!-- Loop genom varje produkt och visa den -->
   <% @products.each do |product| %>
     <div class="product">
-      <a class = "product_link" href="product/<%=product['id']%>">
-      <img class="product_img"src="<%=product['image_path']%>" alt="<%=product['name']%>">
-      <h2 class="product_text"><%= product['name'] %></h2>
+      <!-- Lägg till en länk runt produktens namn eller bild som leder till detaljsidan för den produkten -->
+      <a class="product_link" href="/products/product/<%= product['id'] %>">
+        <img class="product_img" src="<%= product['image_path'] %>" alt="<%= product['name'] %>">
+        <h2 class="product_text"><%= product['name'] %></h2>
       </a>
       <p class="product_text">Price: <%= product['price'] %> SEK</p>
     </div>
   <% end %>
 </div>
-

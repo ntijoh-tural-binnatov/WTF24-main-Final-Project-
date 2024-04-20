@@ -68,19 +68,49 @@ class App < Sinatra::Base
         erb :'products/show'
     end
 
+    #get '/products/:id' do |id|
+     #   @products = []
+      #  @tagid = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first['id']
+       # @product_tags_selected = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', @tagid)
+        #for tag in @product_tags_selected do
+         #   tag = tag['product_id']
+          #  product = db.execute('SELECT * FROM products WHERE id = ?', tag).first
+           # @products.append(product)
+       # end
+        #@tags = db.execute('SELECT * FROM tags')
+        #@product_tags = db.execute('SELECT * FROM tags INNER JOIN product_tags ON tags.id = product_tags.tag_id INNER JOIN products ON product_tags.product_id = products.id')
+        #erb :'products/index'
+    #end
+
     get '/products/:id' do |id|
         @products = []
-        @tagid = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first['id']
-        @product_tags_selected = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', @tagid)
-        for tag in @product_tags_selected do
-            tag = tag['product_id']
-            product = db.execute('SELECT * FROM products WHERE id = ?', tag).first
-            @products.append(product)
+        # Hämta taggens ID från databasen med det givna taggnamnet
+        tag = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first
+        if tag
+            tag_id = tag['id']
+            # Hämta alla produkt-tag-förhållanden för den valda taggen
+            product_tags = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', tag_id)
+            # Loopa igenom produkt-tag-förhållandena och hämta motsvarande produkter
+            product_tags.each do |product_tag|
+                product_id = product_tag['product_id']
+                product = db.execute('SELECT * FROM products WHERE id = ?', product_id).first
+                @products << product if product
+            end
+        else
+            # Om taggen inte hittas, skapa ett felmeddelande eller hantera situationen på annat sätt
+            @error_message = "Tag not found: #{id}"
         end
+        # Hämta alla taggar och produkt-tag-förhållanden för visning i vyn
         @tags = db.execute('SELECT * FROM tags')
         @product_tags = db.execute('SELECT * FROM tags INNER JOIN product_tags ON tags.id = product_tags.tag_id INNER JOIN products ON product_tags.product_id = products.id')
         erb :'products/index'
     end
+    
+    post '/products/tags' do
+        tag = params["tag"]
+        redirect "/products/#{tag}"
+    end
+    
 
     post '/products/tags' do
         tag = params["tag"]
@@ -99,9 +129,7 @@ class App < Sinatra::Base
         result = db.execute('INSERT INTO products (name, description, price, image_path) VALUES (?, ?, ?, ?) RETURNING *', params[:name], params[:description], params[:price], file_path).first
         redirect "/products/#{result["id"]}"
     end
-
-   
-
+    
     get '/products/:id/delete' do |id|
         @product = db.execute('SELECT * FROM products WHERE id = ?', id).first
         erb :'products/delete'
