@@ -1,7 +1,6 @@
 body {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
     background-color:#007bff;
     overflow-x: hidden;
 }
@@ -19,8 +18,8 @@ body {
 }
 
 .layout h1 {
-    transform: translateX(80%);
     text-decoration: none;
+    transform: translateX(80%);
 }
 
 #product_page {
@@ -46,7 +45,8 @@ body {
 
 .product_text {
     text-align: center;
-    color: darkorchid;
+    text-decoration: none;
+    color: #007bff;
     margin-bottom: 10px;
 }
 
@@ -124,6 +124,12 @@ body {
     transform: translateY(150%);
 }
 
+.register h1{
+    color: white;
+    transform: translateX(10%);
+    transform: translateY(150%);
+}
+
 .login form {
     transform: translateY(150%);
 }
@@ -137,11 +143,10 @@ body {
 
 .the_product {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin-bottom: 20px;
     margin-top: 6pc;
     padding: 20px;
+    transform: translateX(-21%);
     background-color: #fff;
     border: 2px solid black;
     border-radius: 8px;
@@ -159,6 +164,7 @@ body {
 
 .tags {
     margin-bottom: 20px;
+    transform: translateX(400%);
 }
 
 .links {
@@ -206,7 +212,7 @@ body {
 }
 
 .create_button{
-    height: 50px;
+    height: 50px;-
     width: 50px;
     transform: translateX(-9rem);
     transform: translateY(3rem);
@@ -216,3 +222,4 @@ body {
     text-decoration: none;
     color: black;
 }
+

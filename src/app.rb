@@ -68,27 +68,13 @@ class App < Sinatra::Base
         erb :'products/show'
     end
 
-    #get '/products/:id' do |id|
-     #   @products = []
-      #  @tagid = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first['id']
-       # @product_tags_selected = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', @tagid)
-        #for tag in @product_tags_selected do
-         #   tag = tag['product_id']
-          #  product = db.execute('SELECT * FROM products WHERE id = ?', tag).first
-           # @products.append(product)
-       # end
-        #@tags = db.execute('SELECT * FROM tags')
-        #@product_tags = db.execute('SELECT * FROM tags INNER JOIN product_tags ON tags.id = product_tags.tag_id INNER JOIN products ON product_tags.product_id = products.id')
-        #erb :'products/index'
-    #end
-
     get '/products/:id' do |id|
         @products = []
-        # Hämta taggens ID från databasen med det givna taggnamnet
+        # Hämtar taggens ID från databasen med det givna taggnamnet
         tag = db.execute('SELECT * FROM tags WHERE tag_name = ?', id).first
         if tag
             tag_id = tag['id']
-            # Hämta alla produkt-tag-förhållanden för den valda taggen
+            # Hämtar alla produkt-tag-förhållanden för den valda taggen
             product_tags = db.execute('SELECT * FROM product_tags WHERE tag_id = ?', tag_id)
             # Loopa igenom produkt-tag-förhållandena och hämta motsvarande produkter
             product_tags.each do |product_tag|
@@ -148,26 +134,6 @@ class App < Sinatra::Base
         redirect "/products"
     end
 
-    post '/products/:id/update' do |id|
-        if params[:file] != nil
-            product = db.execute('SELECT FROM products WHERE id = ?', id)
-            File.delete(product['image_path'])
-            
-            file_name = SecureRandom.alphanumeric(16)
-            file = params[:file][:tempfile]
-            file_path = "img/product/#{file_name}.jpg"
-
-            File.open("public/#{file_path}", 'wb') do |f|
-                f.write(file.read)
-            end
-
-            result = db.execute('UPDATE products SET name = ?, description = ?, price= ?, image_path = ? WHERE id = ? RETURNING *', params[:name], params[:description], params[:price], file_path, id).first
-        else
-            result = db.execute('UPDATE products SET name = ?, description = ?, price= ? WHERE id = ? RETURNING *', params[:name], params[:description], params[:price], id).first
-        end
-        redirect "/products/#{result['id']}"
-    end
-
     get '/reviews/:id/delete' do |id|
         @review = db.execute('SELECT * FROM reviews WHERE id = ?', id).first
         erb :'reviews/delete'
@@ -177,6 +143,6 @@ class App < Sinatra::Base
         product_id = db.execute('SELECT * FROM product_reviews WHERE review_id = ?', id).first['product_id']
         db.execute('DELETE FROM product_reviews WHERE review_id = ?', id)
         db.execute('DELETE FROM reviews WHERE id  = ?', id)
-        redirect "/products/#{product_id}"
+        redirect "/products/index"
     end
 end 
