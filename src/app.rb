@@ -20,20 +20,29 @@ class App < Sinatra::Base
 
     post '/user/register' do
         username = params["username"]
+        mail = params["mail"]
         password = params["password"]
-        db.execute('INSERT INTO users_account (username, password) VALUES (?,?)', username, password)
-        redirect '/'
-
+        hashed_password = BCrypt::Password.create(password)
+        db.execute('INSERT INTO users_account (username, password, mail) VALUES (?,?,?)', username, hashed_password, mail)
+        redirect '/user/login'
     end
 
     post '/user/login' do
+        username = params['username']
+        cleartext_password = params['password']
+
         user = db.execute('SELECT * FROM users_account WHERE username = ?', params[:username]).first
-        if user['password'] == params[:password]
-            redirect '/products/1'
+
+        password_from_db = BCrypt::Password.new(user['password'])
+
+        if password_from_db == cleartext_password
+            session[:user_id] = user['id']
+            redirect '/products'
         else
             redirect '/products/404'
         end
     end
+
 
     get '/' do
         redirect '/products'

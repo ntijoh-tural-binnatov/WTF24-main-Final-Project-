@@ -56,6 +56,7 @@ def create_tables
         "id"	INTEGER,
         "username"	TEXT NOT NULL,
         "password"	TEXT NOT NULL,
+        "mail" TEXT NOT NULL,
         PRIMARY KEY("id" AUTOINCREMENT)
     )')
     
