@@ -1,0 +1,39 @@
+<div id="checkout_page">
+  <h2>Checkout</h2>
+  <p>Please review your order before proceeding to payment.</p>
+
+  <% if @cart_items.empty? %>
+    <p>Your cart is empty.</p>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><%= item['name'] %></td>
+            <td><%= item['price'] %> SEK</td>
+            <td><%= item['quantity'] %></td>
+            <td><%= item['price'] * item['quantity'] %> SEK</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <h3>Total: <%= @total_price %> SEK</h3>
+    <form action="/checkout" method="post">
+      <button type="submit">Confirm and Pay</button>
+    </form>
+  <% end %>
+  
+  <br>
+  <div class="links">
+    <a href="/cart"><input type="button" value="Back to Cart"></a>
+  </div>
+</div>

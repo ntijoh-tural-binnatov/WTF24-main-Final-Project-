@@ -1,11 +1,29 @@
-
-<div class="create_new_product">
-    <h2>Create new product</h2>
+<% if admin? %>
+  <div class="create_new_product">
+    <h2>Create New Product</h2>
     <form action="/products/create" method='post' enctype="multipart/form-data">
-        Name: <input type="text" name='name'></input> <br> <br>
-        Description: <input type="text" name='description'></input><br><br>
-        Price: <input type="number" name='price'></input><br><br>
-        Image: <input type="file" name='file'></input><br><br>
-        <button type="submit">Create product</button>
+      <label for="username">Name:</label>
+      <input type="text" name='name' id="name" placeholder='Name' required><br><br>
+      
+      <label for="description">Description:</label>
+      <input type="text" name='description' id="description" placeholder='Description' required><br><br>
+      
+      <label for="price">Price:</label>
+      <input type="number" name='price' id="price" placeholder='Price' required><br><br>
+      
+      <label for="file">Image:</label>
+      <input type="file" name='file' id="file" required><br><br>
+      
+      <label for="tag">Tag:</label>
+      <select name="tag" id="tag">
+        <% @tags.each do |tag| %>
+          <option value="<%= tag['tag_name'] %>"><%= tag['tag_name'] %></option>
+        <% end %>
+      </select><br><br>
+      <button type="submit">Create Product</button>
     </form>
-</div>
+  </div>
+<% else %>
+  <p>You do not have permission to create products.</p>
+<% end %>
+

@@ -1,43 +1,65 @@
 <div class="the_product">
+  <div class="product_details">
     <img class="the_product_image" src="/<%= @product['image_path'] %>" alt="<%= @product['name'] %>">
-    <div class="product_details">
-        <h2><%= @product['name'] %></h2>
-        <p><%= @product['description'] %></p>
-        <p>Price: <%= @product['price'] %> SEK</p>
-        <h2>Rating: <%=@rating%></h2>
-    </div>
+    <h2><%= @product['name'] %></h2>
+    <p><%= @product['description'] %></p>
+    <p>Price: <%= @product['price'] %> SEK</p>
+    <h2>Rating: <%= @rating %></h2>
+    
+    <% if session[:username] %>
+      <form action="/cart/add/<%= @product['id'] %>" method="post">
+        <button type="submit">Add to Cart</button>
+      </form>
+    <% end %>
+  </div>
 </div>
 
 <div class="tags">
-    <h3>Tags:</h3>
-    <% @product_tags.each do |tag| %>
-        <p><%= tag['tag_name'] %></p>
-    <% end %>
+  <h3>Tags:</h3>
+  <% @product_tags.each do |tag| %>
+    <p><%= tag['tag_name'] %></p>
+  <% end %>
 </div>
 
 <div class="links">
-    <a href="/products"><input type="submit" value="Homepage    "></a>
+  <a href="/products"><input type="submit" value="Homepage"></a>
 </div>
 
-<div class="giving-rating">
+<% if session[:username] %>
+  <div class="giving-rating">
     <h3>Leave a Review</h3>
-    <form action="/products/review/<%=@product['id']%>" method='post'>
-        <label for="rating">Rating:</label>
-        <input type="number" min="0" max="5" name='rating'><br>
-        <label for="review">Review:</label>
-        <input type="text" name='review'><br>
-        <input type="hidden" name="redirect_to" value="<%= request.base_url %>/products/product/<%= @product['id'] %>">
-        <button type="submit">Submit review</button>
+    <form action="/products/review/<%= @product['id'] %>" method='post'>
+      <label for="rating">Rating:</label>
+      <input type="number" min="0" max="5" name='rating'><br>
+      <label for="review">Review:</label>
+      <input type="text" name='review'><br>
+      <!-- Lägg till ett gömt fält för att spara den aktuella URL:en -->
+      <input type="hidden" name="redirect_to" value="<%= request.base_url + request.path %>">
+      <button type="submit">Submit review</button>
     </form>
-</div>
+  </div>
+<% else %>
+  <div class="login-message">
+    <h3><a href="/user/login">log in</a> or <a href="/user/register">register</a> to leave a review</h3>
+  </div><br>
+<% end %>
 
-<div class="rating-show">
-    <h3>Reviews:</h3>
+<% if @reviews && @reviews.any? %> <!-- Kontrollera om @reviews är inte nil och innehåller några recensioner -->
+  <div class="rating-show">
+    <h3>Reviews:</h3> <!-- Visa rubriken "Reviews" om det finns recensioner -->
     <% @reviews.each do |review| %>
-        <div class="review">
-            <h4>Rating: <%= review['rating'] %>/5</h4>
-            <p><%= review['review'] %></p>
-            <a href="/reviews/<%= review['review_id'] %>/delete">Delete Comment</a>
-        </div>
+      <div class="review">
+        <p>Review by: <%= get_username(review['user_id']) %></p>
+        <h4>Rating: <%= review['rating'] %>/5</h4>
+        <p><%= review['review'] %></p>
+        <% if admin? %>
+          <form action="/reviews/<%= review['id'] %>/delete" method="post">
+            <button type="submit">Delete Review</button>
+          </form>
+        <% end %>
+      </div>
     <% end %>
-</div>
+  </div>
+<% else %>
+  <h3>No reviews yet</h3> <!-- Visa ett meddelande om det inte finns några recensioner -->
+<% end %>

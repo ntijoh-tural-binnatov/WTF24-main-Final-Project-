@@ -1,0 +1,26 @@
+<div id="order_details_page">
+  <h2>Order Details</h2>
+  <h3>Order ID: <%= @order['id'] %></h3>
+  <h4>Total Price: <%= @order['total_price'] %> SEK</h4>
+  <h4>Date: <%= @order['created_at'] %></h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each do |item| %>
+      <tr>
+        <td><%= item['product_id'] %></td>
+        <td><%= item['price'] %> SEK</td>
+        <td><%= item['quantity'] %></td>
+        <td><%= item['price'] * item['quantity'] %> SEK</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

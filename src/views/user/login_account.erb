@@ -1,7 +1,24 @@
 <div class="login">
-    <form action="/user/login" method='post'>
-        Username: <input type="text" name='username'></input> <br> <br>
-        Password: <input type="text" name='password'></input><br><br>
-        <button type="submit">Log in</button>
+    
+    <% if session[:error] %>
+        <div class="error">
+            <%= session[:error] %>
+        </div>
+        <% session[:error] = nil %>
+        <%else%>
+        <h1>Please select the login type</h1>
+    <% end %>
+    
+    <form action="/user/login/admin" method='post'>
+        Username: <input type="text" name='username' placeholder='username' required></input> <br> <br>
+        Password: <input type="password" name='password' placeholder='password' required></input><br><br>
+        <button type="submit">Log in as Admin</button>
+    </form>
+
+    <br><br>
+    <form action="/user/login/guest" method='post'>
+        Username: <input type="text" name='username' placeholder='username' required></input> <br> <br>
+        Password: <input type="password" name='password' placeholder='password' required></input><br><br>
+        <button type="submit">Log in as Guest</button>
     </form>
 </div>

@@ -1,0 +1,27 @@
+<div id="orders_page">
+  <h2>Your Orders</h2>
+  <% if @orders.empty? %>
+  <p>You have no orders.</p>
+  <% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Total Price</th>
+        <th>Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+      <tr>
+        <td><%= order['id'] %></td>
+        <td><%= order['total_price'] %> SEK</td>
+        <td><%= order['created_at'] %></td>
+        <td><a href="/orders/<%= order['id'] %>">View Details</a></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>

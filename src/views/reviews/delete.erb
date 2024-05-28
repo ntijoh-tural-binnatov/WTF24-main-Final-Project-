@@ -1,7 +1,14 @@
-<div class="delete_comment">
-    <p>Are you sure you would like to delete the comment "<%=@review['review']%>" ?</p>
-
-    <form action="/reviews/<%=@review['id']%>/delete" method='post'>
-        <button type="submit">Delete</button>
-    </form> 
-</div>
+<% if @review %>
+  <div class="delete_review">
+    <p>Are you sure you want to delete the review "<%= @review['review'] %>"?</p>
+    <!-- Gömt fält för att spara den aktuella URL:en -->
+    <input type="hidden" name="redirect_to" value="<%= request.referrer %>">
+    <!-- Lägg till ett dolt fält för att skicka ID:et för recensionen -->
+    <input type="hidden" name="review_id" value="<%= @review['id'] %>">
+    <form action="/reviews/<%= @review['id'] %>/delete" method="post">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+<% else %>
+  <p>The review was not found.</p>
+<% end %>

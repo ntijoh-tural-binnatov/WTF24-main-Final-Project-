@@ -1,0 +1,44 @@
+<div id="cart_page">
+  <h2>Your Cart</h2>
+  <% if @cart_items.empty? %>
+    <p>Your cart is empty.</p>
+  <% else %>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_items.each do |item| %>
+          <tr>
+            <td><%= item['name'] %></td>
+            <td><%= item['price'] %> SEK</td>
+            <td><%= item['quantity'] %></td>
+            <td><%= item['price'] * item['quantity'] %> SEK</td>
+            <td>
+              <form action="/cart/item/<%= item['id'] %>/remove" method="post" style="display:inline;">
+                <button type="submit">Remove</button>
+              </form>
+              <form action="/cart/item/<%= item['id'] %>/update" method="post" style="display:inline;">
+                <input type="number" name="quantity" min="1" value="<%= item['quantity'] %>">
+                <button type="submit">Update</button>
+              </form>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+    <h3>Total: <%= @total_price %> SEK</h3>
+    <button class="checkout"><a href="/checkout">Proceed to Checkout</a></button><br>
+  <% end %>
+  <br>
+  <div class="links">
+    <a href="/products"><input type="button" value="Continue Shopping"></a>
+  </div>
+</div>

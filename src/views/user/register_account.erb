@@ -1,17 +1,16 @@
 <div class="register">
     <h1>Welcome to register account</h1>
     <form action="/user/register" method='post'>
-        Username: <input type="text" name='username'></input> <br> <br>
-        Password: <input type="text" name='password'></input><br><br>
-        Mail: <input type="text" name='mail'></input><br><br>
+        Username: <input type="text" name='username' placeholder="Username" required></input> <br> <br>
+        Password: <input type="password" name='password' placeholder="Password" required></input><br><br>
+
+        Mail: <input type="email" name='mail' placeholder="Mail" required></input><br><br>
+        Role: <select name="role" required>
+        <option value="admin">Admin</option>
+        <option value="guest">Guest</option>
+        </select><br><br>
         <button type="submit">Register account</button>
     </form>
 </div>
 
 
-<%#
-<select name="status" id="">
-    <option value="user">User</option>
-    <option value="admin">Admin</option>
-    </select>
-%>
